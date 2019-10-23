@@ -6,11 +6,6 @@
 
 import tensorflow as tf
 tf.test.is_gpu_available( cuda_only=False, min_cuda_compute_capability=None )
-
-
-# In[2]:
-
-
 import os
 from xml.etree import ElementTree
 from os import listdir 
@@ -116,26 +111,7 @@ test_set.prepare()
 # In[8]:
 
 
-image_id = 0 
-image = train_set.load_image(image_id) 
-print(image.shape) 
-mask, class_ids = train_set.load_mask(image_id) 
-print(mask.shape) 
-pyplot.imshow(image) 
-pyplot.imshow(mask[:, :, 0], cmap='gray', alpha=0.5)
-pyplot.show()
-
-
 # ## Creating a config Class
-
-# In[ ]:
-
-
-
-
-
-# In[9]:
-
 
 config = KangarooConfig() 
 config.display() 
@@ -152,17 +128,6 @@ model.load_weights('mask_rcnn_coco.h5', by_name=True, exclude=["mrcnn_class_logi
 
 
 model.train(train_set, test_set,learning_rate=config.LEARNING_RATE, epochs=5, layers='heads')
+# layers = heads will only train the classifier part
 
-
-# In[ ]:
-
-
-import keras
-print(keras.__version__)
-
-
-# In[ ]:
-
-
-pip install keras==2.2.5
 
